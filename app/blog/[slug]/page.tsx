@@ -6,6 +6,8 @@ import { CommandMenu } from '@/components/command-menu'
 const apiKey = process.env.GHOST_CONTENT_API_KEY;
 const apiUrl = process.env.GHOST_API_URL;
 
+export const dynamic = 'force-dynamic'; // Force dynamic rendering
+
 export default async function BlogPost({ params }: { params: { slug: string } }) {
   const { slug } = params;
 
@@ -25,7 +27,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
   url.searchParams.append('include', 'tags');
 
   try {
-    const response = await fetch(url.toString());
+    const response = await fetch(url.toString(), { cache: 'no-store' });
 
     if (!response.ok) {
       throw new Error(`Failed to fetch post data. Status: ${response.status}`);
@@ -51,7 +53,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       .join(', ');
 
     return (
-      <main className="min-h-screen px-4 py-8 bg-background text-foreground">
+      <main className="min-h-screen px-4 py-8 bg-background text-foreground slug-page">
         <nav className="max-w-2xl mx-auto mb-16">
           <div className="flex items-center space-x-1 text-sm font-mono">
             <Link href="/" className="text-muted-foreground">@krisyotam</Link>
@@ -69,14 +71,16 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             <span className="mx-2">•</span>
             <span>{postDate}</span>
           </div>
+
+          {/* Render post content */}
           <ContentRenderer content={post.html} />
         </article>
 
         <CommandMenu />
       </main>
-    )
+    );
   } catch (error) {
-    console.error('Error in BlogPost component:', error);
+    console.error('Error fetching blog post data:', error);
     notFound();
   }
 }
@@ -94,7 +98,7 @@ export async function generateStaticParams() {
     url.searchParams.append('limit', 'all');
     url.searchParams.append('filter', 'tag:#krispuremath');
 
-    const response = await fetch(url.toString());
+    const response = await fetch(url.toString(), { cache: 'no-store' });
 
     if (!response.ok) {
       throw new Error(`Failed to fetch posts. Status: ${response.status}`);

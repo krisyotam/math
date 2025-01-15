@@ -79,3 +79,95 @@ body {
   font-feature-settings: "liga" 1, "calt" 1; /* fix for Chrome */
 }
 
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    /* other variables... */
+  }
+
+  .dark {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 98%;
+    /* other dark mode variables... */
+  }
+}
+
+@layer base {
+  .slug-page * {
+    @apply border-border;
+  }
+  .slug-page body {
+    @apply bg-background text-foreground;
+  }
+
+  .slug-page h1, .slug-page h2, .slug-page h3, .slug-page h4, .slug-page h5, .slug-page h6 {
+    @apply font-bold text-foreground;
+  }
+
+  .slug-page h1 {
+    @apply text-4xl mb-4 mt-8;
+  }
+
+  .slug-page h2 {
+    @apply text-3xl mb-4 mt-6;
+  }
+
+  .slug-page h3 {
+    @apply text-2xl mb-3 mt-5;
+  }
+
+  .slug-page h4 {
+    @apply text-xl mb-2 mt-4;
+  }
+
+  .slug-page p {
+    @apply mb-4 leading-7;
+  }
+
+  .slug-page ul, .slug-page ol {
+    @apply list-disc list-inside mb-4 pl-6;
+  }
+
+  .slug-page ol {
+    list-style-type: decimal;
+  }
+
+  .slug-page li {
+    @apply mb-1;
+  }
+
+  .slug-page blockquote {
+    @apply border-l-4 pl-4 italic text-muted-foreground mb-4;
+    border-color: var(--muted-foreground);
+  }
+
+  .slug-page pre {
+    @apply bg-muted text-foreground rounded p-4 overflow-auto;
+  }
+
+  .slug-page code {
+    @apply bg-muted text-foreground px-1 rounded;
+  }
+
+  .slug-page a {
+    @apply text-primary hover:no-underline;
+  }
+
+  .slug-page img {
+    @apply max-w-full rounded;
+  }
+
+  .slug-page table {
+    @apply w-full border-collapse border border-muted-foreground;
+  }
+
+  .slug-page th, .slug-page td {
+    @apply border border-muted-foreground px-4 py-2;
+  }
+
+  .slug-page th {
+    @apply bg-muted text-foreground font-bold;
+  }
+}

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { getPosts, GhostPost } from '@/utils/ghost'
 
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 0 // Revalidate every hour
 export const dynamic = 'force-dynamic'; // Force dynamic rendering
 
 export default async function Home() {
@@ -40,7 +40,7 @@ export default async function Home() {
             posts.slice(0, 4).map((post) => (
               <div key={post.id} className="flex">
                 <span className="w-16 flex-shrink-0 text-muted-foreground">
-                  {new Intl.DateTimeFormat('en-US', { month: '2-digit', year: '2-digit' }).format(new Date(post.published_at))}
+                  {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit' }).format(new Date(post.published_at)).replace('/', '·')}
                 </span>
                 <Link 
                   href={`/blog/${post.slug}`}

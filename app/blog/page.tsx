@@ -3,7 +3,8 @@ import { CommandMenu } from '@/components/command-menu'
 import { getPosts, GhostPost } from '@/utils/ghost'
 import { CategoryTable } from './components/CategoryTable'
 
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 0; // Revalidate immediately on each request
+export const dynamic = 'force-dynamic'; // Force dynamic rendering
 
 export default async function BlogIndexPage() {
   let posts: GhostPost[] = [];

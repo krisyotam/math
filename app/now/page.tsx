@@ -1,6 +1,3 @@
-// Force dynamic rendering for this page
-export const dynamic = 'force-dynamic';
-
 import Link from 'next/link'
 import { CommandMenu } from '@/components/command-menu'
 import { ImageGallery } from '@/components/ImageGallery'
@@ -9,7 +6,8 @@ import { GhostPost } from '@/utils/ghost'
 const apiKey = process.env.GHOST_CONTENT_API_KEY;
 const apiUrl = process.env.GHOST_API_URL;
 
-export const revalidate = 3600; // Revalidate every hour
+export const dynamic = 'force-dynamic'; // Force dynamic rendering
+export const revalidate = 0; // Revalidate every hour
 
 async function getNowPosts(): Promise<GhostPost[]> {
   const url = new URL('/ghost/api/v3/content/posts/', apiUrl);
@@ -39,6 +37,30 @@ function extractImagesFromContent(content: string): string[] {
 function removeImagesFromContent(content: string): string {
   return content.replace(/<img[^>]+>/g, '');
 }
+
+// Function to truncate content to a certain length and ensure no tags are cut off
+function truncateContent(content: string, maxLength: number): string {
+  if (!content || content.trim() === "") {
+    return "No content available"; // Or any fallback message
+  }
+
+  if (content.length <= maxLength) return content; // No truncation needed if content is short enough
+
+  let truncated = content.substring(0, maxLength);
+
+  // Ensure tags are properly closed by checking if truncation ends mid-tag
+  const lastTagEnd = truncated.lastIndexOf('>');
+  const lastTagStart = truncated.lastIndexOf('<', lastTagEnd);
+
+  if (lastTagStart > -1) {
+    truncated = truncated.substring(0, lastTagEnd + 1); // Remove the broken tag
+  }
+
+  return truncated + '...'; // Add ellipsis to indicate truncation
+}
+
+
+
 
 export default async function NowPage() {
   let posts: GhostPost[] = [];
@@ -78,6 +100,8 @@ export default async function NowPage() {
             posts.map((post) => {
               const images = extractImagesFromContent(post.html || '');
               const contentWithoutImages = removeImagesFromContent(post.html || '');
+              const truncatedContent = truncateContent(contentWithoutImages, 300); // Set the max length for previews
+
               return (
                 <div key={post.id} className="border-b border-gray-200 dark:border-gray-800 pb-8">
                   <Link href={`/blog/${post.slug}`} className="block">
@@ -85,7 +109,7 @@ export default async function NowPage() {
                       {post.title}
                     </h2>
                   </Link>
-                  <div className="prose dark:prose-invert max-w-none mb-4" dangerouslySetInnerHTML={{ __html: contentWithoutImages }} />
+                  <div className="prose dark:prose-invert max-w-none mb-4" dangerouslySetInnerHTML={{ __html: truncatedContent }} />
                   {images.length > 0 && (
                     <ImageGallery images={images} />
                   )}
