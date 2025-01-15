@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { CommandMenu } from '@/components/command-menu'
 import { getPosts, GhostPost } from '@/utils/ghost'
 
 export const revalidate = 3600 // Revalidate every hour
@@ -55,8 +54,6 @@ export default async function Home() {
           )}
         </div>
       </div>
-      <CommandMenu />
     </main>
   )
 }
-

@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { ThemeProvider } from '@/components/theme-provider'
+import { CommandMenu } from '@/components/command-menu'
 
 export const metadata: Metadata = {
   title: 'Minimalist Blog',
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           {children}
+          <CommandMenu />
         </ThemeProvider>
       </body>
     </html>

@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link'
 import { DynamicCommandMenu } from '@/components/dynamic-command-menu'
 import cryptoAddresses from '@/data/crypto-addresses.json'

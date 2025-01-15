@@ -16,7 +16,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
         {images.map((src, index) => (
           <div key={index} className="relative aspect-square">
             <Image
-              src={src}
+              src={src || "/placeholder.svg"}
               alt={`Gallery image ${index + 1}`}
               fill
               className="object-cover rounded-lg cursor-pointer"
@@ -32,7 +32,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
         >
           <div className="relative w-full max-w-3xl aspect-square">
             <Image
-              src={selectedImage}
+              src={selectedImage || "/placeholder.svg"}
               alt="Expanded image"
               fill
               className="object-contain"
