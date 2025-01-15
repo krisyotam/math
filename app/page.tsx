@@ -27,7 +27,7 @@ export default async function Home() {
           <h1 className="text-xl font-normal mb-2">Kris Yotam</h1>
           <div className="flex items-center text-sm">
             <span className="text-muted-foreground mr-2">|</span>
-            <p className="italic text-muted-foreground">
+            <p className="text-muted-foreground">
               "Pure mathematics is, in its way, the poetry of logical ideas." - Albert Einstein
             </p>
           </div>
