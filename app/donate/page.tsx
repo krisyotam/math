@@ -2,9 +2,17 @@
 
 import Link from 'next/link'
 import { DynamicCommandMenu } from '@/components/dynamic-command-menu'
-import cryptoAddresses from '@/data/crypto-addresses.json'
+import { useEffect, useState } from 'react'
 
 export default function DonatePage() {
+  const [cryptoAddresses, setCryptoAddresses] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/crypto-addresses')
+      .then(response => response.json())
+      .then(data => setCryptoAddresses(data));
+  }, []);
+
   return (
     <main className="min-h-screen px-4 py-8 bg-background text-foreground">
       <nav className="max-w-2xl mx-auto mb-16">
@@ -60,4 +68,5 @@ export default function DonatePage() {
     </main>
   )
 }
+
 

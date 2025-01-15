@@ -1,39 +1,19 @@
+'use client';
+
 import Link from 'next/link'
 import { CommandMenu } from '@/components/command-menu'
 import { ArrowUpRight } from 'lucide-react'
-
-const projects = [
-  {
-    title: "Mathematical Visualization Library",
-    description: "An open-source library for creating interactive mathematical visualizations using WebGL and React.",
-    link: "https://github.com/krisyotam/math-vis",
-    year: "2024",
-    status: "Active"
-  },
-  {
-    title: "Category Theory Notes",
-    description: "Interactive digital garden exploring category theory concepts with practical applications in programming.",
-    link: "https://cat-theory.krisyotam.com",
-    year: "2023",
-    status: "Active"
-  },
-  {
-    title: "Quantum Computing Simulator",
-    description: "Browser-based quantum circuit simulator with visual state representations.",
-    link: "https://quantum.krisyotam.com",
-    year: "2023",
-    status: "Completed"
-  },
-  {
-    title: "Type Theory Playground",
-    description: "Interactive environment for exploring dependent type theory and proof assistants.",
-    link: "https://types.krisyotam.com",
-    year: "2022",
-    status: "Archived"
-  }
-]
+import { useEffect, useState } from 'react'
 
 export default function WorkPage() {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/work-projects')
+      .then(response => response.json())
+      .then(data => setProjects(data));
+  }, []);
+
   return (
     <main className="min-h-screen px-4 py-8 bg-background text-foreground">
       <nav className="max-w-2xl mx-auto mb-16">

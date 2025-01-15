@@ -1,9 +1,19 @@
+'use client';
+
 import Link from 'next/link'
 import { CommandMenu } from '@/components/command-menu'
 import { Play } from 'lucide-react'
-import talks from '@/data/talks.json'
+import { useEffect, useState } from 'react'
 
 export default function TalksPage() {
+  const [talks, setTalks] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/talks')
+      .then(response => response.json())
+      .then(data => setTalks(data));
+  }, []);
+
   return (
     <main className="min-h-screen px-4 py-8 bg-background text-foreground">
       <nav className="max-w-2xl mx-auto mb-16">

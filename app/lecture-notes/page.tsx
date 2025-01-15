@@ -1,16 +1,27 @@
+'use client';
+
 import Link from 'next/link'
 import { DynamicCommandMenu } from '@/components/dynamic-command-menu'
 import { CourseCard } from './components/CourseCard'
-import lectureNotesData from '@/data/lecture-notes.json'
+import { useEffect, useState } from 'react'
 
 export default function LectureNotesPage() {
-  const groupedCourses = lectureNotesData.reduce((acc, course) => {
-    if (!acc[course.sectionName]) {
-      acc[course.sectionName] = [];
-    }
-    acc[course.sectionName].push(course);
-    return acc;
-  }, {} as Record<string, typeof lectureNotesData>);
+  const [groupedCourses, setGroupedCourses] = useState<Record<string, any[]>>({});
+
+  useEffect(() => {
+    fetch('/api/lecture-notes')
+      .then(response => response.json())
+      .then(data => {
+        const grouped = data.reduce((acc, course) => {
+          if (!acc[course.sectionName]) {
+            acc[course.sectionName] = [];
+          }
+          acc[course.sectionName].push(course);
+          return acc;
+        }, {} as Record<string, any[]>);
+        setGroupedCourses(grouped);
+      });
+  }, []);
 
   return (
     <main className="min-h-screen px-4 py-8 bg-background text-foreground">
@@ -44,4 +55,3 @@ export default function LectureNotesPage() {
     </main>
   )
 }
-
