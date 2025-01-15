@@ -10,6 +10,7 @@ interface CourseCardProps {
   syllabusLink: string
   latexLink: string
   fullNotesLink: string
+  sectionName: string  // Added sectionName here
 }
 
 export function CourseCard({ 
@@ -20,7 +21,8 @@ export function CourseCard({
   credits, 
   syllabusLink, 
   latexLink, 
-  fullNotesLink 
+  fullNotesLink, 
+  sectionName // Destructured sectionName here
 }: CourseCardProps) {
   return (
     <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
@@ -40,6 +42,9 @@ export function CourseCard({
         <h3 className="text-lg font-semibold mb-2">{title}</h3>
         <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
           {description}
+        </p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4"> {/* Display sectionName */}
+          {sectionName}
         </p>
         <div className="flex space-x-4">
           <a 
@@ -68,4 +73,3 @@ export function CourseCard({
     </div>
   )
 }
-

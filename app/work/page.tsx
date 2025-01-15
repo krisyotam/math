@@ -5,13 +5,22 @@ import { CommandMenu } from '@/components/command-menu'
 import { ArrowUpRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
+// Define the structure of each project
+interface Project {
+  title: string;
+  link: string;
+  year: string;
+  status: string;
+  description: string;
+}
+
 export default function WorkPage() {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<Project[]>([]); // Specify the type here
 
   useEffect(() => {
     fetch('/api/work-projects')
       .then(response => response.json())
-      .then(data => setProjects(data));
+      .then((data: Project[]) => setProjects(data)); // Type the data explicitly
   }, []);
 
   return (

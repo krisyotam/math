@@ -8,21 +8,21 @@
   },
   {
     "title": "MindMath",
-    "description": "Interactive digital garden exploring category theory concepts with practical applications in programming.",
+    "description": "A project for beginner to olympiad level mental math practice.",
     "link": "https://github.com/krisyotam/MindMath",
     "year": "2024",
     "status": "Completed"
   },
   {
     "title": "Classical Math",
-    "description": "Browser-based quantum circuit simulator with visual state representations.",
+    "description": "A return to ad-fontes mathematics education.",
     "link": "https://github.com/krisyotam/classicalmath",
     "year": "2024",
     "status": "Active"
   },
   {
     "title": "MathProgs",
-    "description": "interesting projects made in scientific languages.",
+    "description": "interesting math projects made in scientific languages.",
     "link": "https://github.com/krisyotam/mathprogs",
     "year": "2024",
     "status": "Active"

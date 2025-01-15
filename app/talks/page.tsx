@@ -5,13 +5,22 @@ import { CommandMenu } from '@/components/command-menu'
 import { Play } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
+// Define the structure of each talk
+interface Talk {
+  title: string;
+  videoId: string;
+  duration: string;
+  date: string;
+  description: string;
+}
+
 export default function TalksPage() {
-  const [talks, setTalks] = useState([]);
+  const [talks, setTalks] = useState<Talk[]>([]); // Specify the type here
 
   useEffect(() => {
     fetch('/api/talks')
       .then(response => response.json())
-      .then(data => setTalks(data));
+      .then((data: Talk[]) => setTalks(data)); // Type the data explicitly
   }, []);
 
   return (
@@ -75,4 +84,3 @@ export default function TalksPage() {
     </main>
   )
 }
-

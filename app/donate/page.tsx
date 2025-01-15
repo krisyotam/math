@@ -4,8 +4,14 @@ import Link from 'next/link'
 import { DynamicCommandMenu } from '@/components/dynamic-command-menu'
 import { useEffect, useState } from 'react'
 
+// Define the structure of a Crypto object
+interface Crypto {
+  name: string;
+  address: string;
+}
+
 export default function DonatePage() {
-  const [cryptoAddresses, setCryptoAddresses] = useState([]);
+  const [cryptoAddresses, setCryptoAddresses] = useState<Crypto[]>([]); // Use Crypto[] type for state
 
   useEffect(() => {
     fetch('/api/crypto-addresses')
@@ -68,5 +74,3 @@ export default function DonatePage() {
     </main>
   )
 }
-
-
