@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { getPosts, GhostPost } from '@/utils/ghost'
 
 export const revalidate = 3600 // Revalidate every hour
+export const dynamic = 'force-dynamic'; // Force dynamic rendering
 
 export default async function Home() {
   let posts: GhostPost[] = [];

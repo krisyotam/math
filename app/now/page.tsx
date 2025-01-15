@@ -1,3 +1,6 @@
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic';
+
 import Link from 'next/link'
 import { CommandMenu } from '@/components/command-menu'
 import { ImageGallery } from '@/components/ImageGallery'
@@ -6,7 +9,7 @@ import { GhostPost } from '@/utils/ghost'
 const apiKey = process.env.GHOST_CONTENT_API_KEY;
 const apiUrl = process.env.GHOST_API_URL;
 
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 3600; // Revalidate every hour
 
 async function getNowPosts(): Promise<GhostPost[]> {
   const url = new URL('/ghost/api/v3/content/posts/', apiUrl);
@@ -96,6 +99,5 @@ export default async function NowPage() {
       </div>
       <CommandMenu />
     </main>
-  )
+  );
 }
-
