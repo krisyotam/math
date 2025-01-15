@@ -13,6 +13,13 @@ interface ContentRendererProps {
 export const ContentRenderer: React.FC<ContentRendererProps> = ({ content }) => {
   const renderContent = () => {
     const sanitizedContent = DOMPurify.sanitize(content);
+    
+    if (typeof window === 'undefined') {
+      // Server-side rendering
+      return sanitizedContent;
+    }
+
+    // Client-side rendering
     const parser = new DOMParser();
     const doc = parser.parseFromString(sanitizedContent, 'text/html');
 
@@ -57,5 +64,3 @@ export const ContentRenderer: React.FC<ContentRendererProps> = ({ content }) => 
     </div>
   );
 };
-
-
