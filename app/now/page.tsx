@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import { CommandMenu } from '@/components/command-menu'
-import { ImageGallery } from '@/components/ImageGallery'
-import { GhostPost } from '@/utils/ghost'
+import Link from 'next/link';
+import { CommandMenu } from '@/components/command-menu';
+import { ImageGallery } from '@/components/ImageGallery';
+import { GhostPost } from '@/utils/ghost';
 
 const apiKey = process.env.GHOST_CONTENT_API_KEY;
 const apiUrl = process.env.GHOST_API_URL;
@@ -59,9 +59,6 @@ function truncateContent(content: string, maxLength: number): string {
   return truncated + '...'; // Add ellipsis to indicate truncation
 }
 
-
-
-
 export default async function NowPage() {
   let posts: GhostPost[] = [];
   let error: string | null = null;
@@ -100,7 +97,7 @@ export default async function NowPage() {
             posts.map((post) => {
               const images = extractImagesFromContent(post.html || '');
               const contentWithoutImages = removeImagesFromContent(post.html || '');
-              const truncatedContent = truncateContent(contentWithoutImages, 300); // Set the max length for previews
+              const previewText = post.excerpt || truncateContent(contentWithoutImages, 300); // Use excerpt or truncate as fallback
 
               return (
                 <div key={post.id} className="border-b border-gray-200 dark:border-gray-800 pb-8">
@@ -109,7 +106,7 @@ export default async function NowPage() {
                       {post.title}
                     </h2>
                   </Link>
-                  <div className="prose dark:prose-invert max-w-none mb-4" dangerouslySetInnerHTML={{ __html: truncatedContent }} />
+                  <div className="prose dark:prose-invert max-w-none mb-4" dangerouslySetInnerHTML={{ __html: previewText }} />
                   {images.length > 0 && (
                     <ImageGallery images={images} />
                   )}

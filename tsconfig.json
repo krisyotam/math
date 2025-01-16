@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "target": "ES6",
     "skipLibCheck": true,
@@ -8,10 +12,10 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",  // Changed to "node" for better compatibility with Next.js
+    "moduleResolution": "node", // Changed to "node" for better compatibility with Next.js
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",  // Updated to "react-jsx" for JSX Transform support
+    "jsx": "preserve", // Updated to "react-jsx" for JSX Transform support
     "incremental": true,
     "plugins": [
       {
@@ -19,9 +23,18 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
